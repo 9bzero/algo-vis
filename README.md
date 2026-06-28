@@ -1,40 +1,43 @@
-# Algorithm Visualizer
+# algo-vis
 
-Interactive visualizer for **pathfinding** and **sorting** algorithms — draw walls, pick an algorithm, and watch it solve.
+I wanted to really *understand* pathfinding — not just know that Dijkstra works, but see why it fans out the way it does, and why A* is faster when you give it a good heuristic. So I built this.
 
-## Pathfinding algorithms
+Draw walls. Pick an algorithm. Watch it go.
 
-| Algorithm | Weighted | Guarantees shortest path |
+## Pathfinding
+
+| Algorithm | Weighted | Shortest path |
 |---|---|---|
-| Dijkstra | Yes | Yes |
-| A* | Yes | Yes |
-| BFS | No | Yes (unweighted) |
-| DFS | No | No |
+| Dijkstra | ✓ | ✓ |
+| A* | ✓ | ✓ (with admissible heuristic) |
+| BFS | ✗ | ✓ on unweighted grids |
+| DFS | ✗ | ✗ |
 
-## Sorting algorithms
+A* uses Manhattan distance as its heuristic. It is not always faster than Dijkstra in the worst case, but in practice it explores significantly fewer nodes on open grids.
 
-Merge Sort · Quick Sort · Heap Sort · Bubble Sort · Insertion Sort
+## Sorting
+
+Merge Sort · Quick Sort · Heap Sort · Bubble Sort · Insertion Sort · Selection Sort
+
+Each bar represents one element. Comparisons light up orange, swaps turn red.
 
 ## Features
 
-- Interactive grid: draw walls, set start/end points, add weights
-- Step-by-step animation with speed control
-- Visited nodes and shortest path highlighted separately
-- Maze generator (recursive division)
-- Bar chart visualization for sorting with comparison counter
-- Reset and re-run without page reload
+- Interactive grid — click/drag to draw walls and weighted cells
+- Weighted cells cost more to traverse (useful for showing why Dijkstra prefers cheaper paths)
+- Diagonal movement toggle
+- Adjustable animation speed
+- Sorting array size and speed sliders
 
-## Stack
-
-![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat&logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/React-61dafb?style=flat&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-646cff?style=flat&logo=vite&logoColor=white)
-
-## Run locally
+## Run
 
 ```bash
-npm install && npm run dev
+npm install
+npm run dev
 ```
 
----
-Made by [9bzero](https://github.com/9bzero)
+## Known limitations
+
+- The grid resets when you switch algorithms (intentional — avoids stale state)
+- Diagonal pathfinding is experimental and can produce slightly suboptimal paths around corners
+- Mobile layout works but the grid is small; desktop is the intended experience
